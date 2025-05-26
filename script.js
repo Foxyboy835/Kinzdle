@@ -6,6 +6,7 @@ const wordLength = answer.length;
 document.documentElement.style.setProperty("--letters", wordLength);
 
 const board = document.getElementById("game-board");
+let currentGuess = "";
 
 // Create rows
 for (let i = 0; i < maxGuesses; i++) {
@@ -19,12 +20,8 @@ for (let i = 0; i < maxGuesses; i++) {
   board.appendChild(row);
 }
 
-// Add event listener to the button
-document.getElementById("submitButton").addEventListener("click", submitGuess);
-
 function submitGuess() {
-  const guessInput = document.getElementById("guessInput");
-  const guess = guessInput.value.toLowerCase().trim();
+  const guess = currentGuess;
 
   if (guess.length !== wordLength) {
     showMessage("Guess must be " + wordLength + " letters.");
@@ -37,12 +34,16 @@ function submitGuess() {
   for (let i = 0; i < wordLength; i++) {
     const box = row.children[i];
     box.textContent = guess[i];
+
     if (guess[i] === answer[i]) {
       box.classList.add("correct");
+      updateKeyboardKey(guess[i], "correct");
     } else if (answer.includes(guess[i])) {
       box.classList.add("present");
+      updateKeyboardKey(guess[i], "present");
     } else {
       box.classList.add("absent");
+      updateKeyboardKey(guess[i], "absent");
     }
   }
 
@@ -50,14 +51,22 @@ function submitGuess() {
   document.getElementById("guessCount").textContent = `Guesses: ${currentGuessCount} / ${maxGuesses}`;
 
   if (guess === answer) {
-    showMessage("You got it! 🎉");
+    showMessage("You got it! ð");
     disableInput();
   } else if (currentGuessCount === maxGuesses) {
     showMessage(`Out of tries! The word was: ${answer}`);
     disableInput();
   }
 
-  guessInput.value = "";
+  currentGuess = "";
+}
+
+function updateBoardDisplay() {
+  const row = board.children[currentGuessCount];
+  for (let i = 0; i < wordLength; i++) {
+    const box = row.children[i];
+    box.textContent = currentGuess[i] || "";
+  }
 }
 
 function showMessage(msg) {
@@ -65,20 +74,40 @@ function showMessage(msg) {
 }
 
 function disableInput() {
-  document.getElementById("guessInput").disabled = true;
-  document.getElementById("submitButton").disabled = true;
+  const keys = document.querySelectorAll(".keyboard-key");
+  keys.forEach(key => key.disabled = true);
 }
+
+function updateKeyboardKey(letter, status) {
+  const keyButton = document.querySelector(`.keyboard-key[data-key="${letter.toUpperCase()}"]`);
+  if (!keyButton) return;
+
+  const currentStatus = keyButton.dataset.status;
+  const statusPriority = { absent: 0, present: 1, correct: 2 };
+
+  if (!currentStatus || statusPriority[status] > statusPriority[currentStatus]) {
+    keyButton.classList.remove("absent", "present", "correct");
+    keyButton.classList.add(status);
+    keyButton.dataset.status = status;
+  }
+}
+
 function handleKeyClick(key) {
-  const input = document.getElementById("guessInput");
+  if (currentGuessCount >= maxGuesses) return;
+
   if (key === "Enter") {
-    submitGuess();
+    if (currentGuess.length === wordLength) {
+      submitGuess();
+    }
   } else if (key === "Del") {
-    input.value = input.value.slice(0, -1);
+    currentGuess = currentGuess.slice(0, -1);
   } else {
-    if (input.value.length < currentWord.length) {
-      input.value += key;
+    if (currentGuess.length < wordLength) {
+      currentGuess += key.toLowerCase();
     }
   }
+
+  updateBoardDisplay();
 }
 
 function createKeyboard() {
@@ -100,6 +129,7 @@ function createKeyboard() {
       const button = document.createElement("button");
       button.textContent = key;
       button.className = "keyboard-key";
+      button.setAttribute("data-key", key);
       button.onclick = () => handleKeyClick(key);
       rowDiv.appendChild(button);
     });
@@ -107,6 +137,7 @@ function createKeyboard() {
     keyboard.appendChild(rowDiv);
   });
 }
+
 window.onload = () => {
   createKeyboard();
-};
+  };
