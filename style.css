@@ -1,6 +1,7 @@
 body {
   font-family: 'Comic Sans MS', sans-serif;
-  background: #d2f3ff url('https://webkinzclassic.s3.amazonaws.com/starburst-bg.png') center/cover repeat;
+  background: #d2f3ff url('background.png') center/cover no-repeat;
+  background-attachment: fixed;
   text-align: center;
   padding: 2em;
   color: #333;
