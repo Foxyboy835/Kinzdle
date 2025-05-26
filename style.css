@@ -75,7 +75,8 @@ button#submitButton {
 /* Logo styles */
 .logo {
   display: block;
-  max-width: 80%;
+  max-width: 300px;
+  width: 80%;
   height: auto;
   margin: 20px auto;
 }
