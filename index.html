@@ -9,11 +9,16 @@
 <body>
   <h1>KINZDLE</h1>
   <div id="game">
-    <div id="board"></div>
-    <input type="text" id="guessInput" autofocus />
-    <button onclick="submitGuess()">Submit</button>
+    <div id="game-board"></div> <!-- changed from id="board" -->
+    
+    <input type="text" id="guessInput" maxlength="6" autofocus />
+    <button id="submitButton">Submit</button>
+
+    <p id="guessCount">Guesses: 0 / 6</p> <!-- NEW -->
     <div id="result"></div>
+    <p id="message"></p> <!-- NEW -->
   </div>
+
   <script src="words.js"></script>
   <script src="script.js"></script>
 </body>
