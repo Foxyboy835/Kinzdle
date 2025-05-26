@@ -72,3 +72,10 @@ button#submitButton {
   margin-top: 10px;
   font-weight: bold;
 }
+/* Logo styles */
+.logo {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: 20px auto;
+}
