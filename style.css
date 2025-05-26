@@ -6,11 +6,6 @@ body {
   padding: 20px;
 }
 
-h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
 #game-board {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
@@ -53,25 +48,12 @@ h1 {
   color: white;
 }
 
-input#guessInput {
-  padding: 8px;
-  font-size: 16px;
-  text-transform: lowercase;
-  width: 120px;
-  margin-bottom: 10px;
-}
-
-button#submitButton {
-  padding: 8px 16px;
-  font-size: 16px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-#guessCount, #message {
+#guessCount,
+#message {
   margin-top: 10px;
   font-weight: bold;
 }
+
 /* Logo styles */
 .logo {
   display: block;
@@ -80,6 +62,7 @@ button#submitButton {
   height: auto;
   margin: 20px auto;
 }
+
 #keyboard {
   margin-top: 20px;
   text-align: center;
@@ -98,6 +81,7 @@ button#submitButton {
   background-color: #ddd;
   cursor: pointer;
   user-select: none;
+  text-transform: uppercase;
 }
 
 .keyboard-key:hover {
