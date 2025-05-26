@@ -1,63 +1,14 @@
 body {
-  font-family: 'Comic Sans MS', sans-serif;
-  background: #d2f3ff url('background.png') center/cover no-repeat;
-  background-attachment: fixed;
-  text-align: center;
-  padding: 2em;
+  font-family: Arial, sans-serif;
+  background: url('background.png') center/cover no-repeat;
   color: #333;
+  text-align: center;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 3em;
-  color: #4444dd;
-  text-shadow: 2px 2px white;
-}
-
-#game {
-  margin-top: 2em;
-}
-
-#board {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 1em auto;
-}
-
-.letter {
-  width: 50px;
-  height: 50px;
-  font-size: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ddd;
-  border: 2px solid #aaa;
-  border-radius: 8px;
-}
-
-.green { background-color: #85e085; }
-.yellow { background-color: #ffeb3b; }
-.gray   { background-color: #ccc; }
-
-input[type="text"] {
-  font-size: 1.5em;
-  padding: 0.4em;
-  width: 200px;
-  text-align: center;
-  margin-top: 10px;
-}
-
-button {
-  font-size: 1.2em;
-  padding: 0.5em 1em;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-#result {
-  font-weight: bold;
-  margin-top: 1em;
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
 #game-board {
@@ -65,7 +16,7 @@ button {
   grid-template-rows: repeat(6, 1fr);
   gap: 10px;
   max-width: 300px;
-  margin: 20px auto;
+  margin: 0 auto 20px auto;
 }
 
 .guess-row {
@@ -84,8 +35,40 @@ button {
   justify-content: center;
   background-color: #fff;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
-.correct { background-color: #6aaa64; color: white; } /* Green */
-.present { background-color: #c9b458; color: white; } /* Yellow */
-.absent  { background-color: #787c7e; color: white; } /* Gray */
+.correct {
+  background-color: #6aaa64;
+  color: white;
+}
+
+.present {
+  background-color: #c9b458;
+  color: white;
+}
+
+.absent {
+  background-color: #787c7e;
+  color: white;
+}
+
+input#guessInput {
+  padding: 8px;
+  font-size: 16px;
+  text-transform: lowercase;
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+button#submitButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#guessCount, #message {
+  margin-top: 10px;
+  font-weight: bold;
+}
